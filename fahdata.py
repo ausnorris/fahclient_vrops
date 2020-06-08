@@ -21,7 +21,7 @@ vropsPassword = "VMware1!"
 vropsHost = "vrops.virtualiseme.com.au"
 vropsAuthsource = "Local"
 teamId = "52737"
-foldingUserName = "<enter folding user name>"
+foldingUserName = "NuggetGTR"
 
 verify = False
 if not verify:
@@ -352,6 +352,10 @@ def main():
                 "statKey" : slotName+"|ppd",
                 "timestamps" : [ timestamp ],
                 "data" : [ info["ppd"] ]
+            },{
+                "statKey" : "total_ppd",
+                "timestamps" : [ timestamp ],
+                "data" : [ float(host.host_ppd) ]
             } ]
         }
         propPayload = {
@@ -389,7 +393,7 @@ def main():
 
       resourceId = fahClientRes["identifier"]
       #print(metricPayload)
-      metricResponse = vropsRequest("api/resources/"+resourceId+"/stats","POST","",metricPayload,False)
+      metricResponse = vropsRequest("api/resources/"+resourceId+"/stats","POST","",metricPayload,True)
       propResponse = vropsRequest("api/resources/"+resourceId+"/properties","POST","",propPayload,False)
     if host.slots.__len__() < 1:
       print("No active work units")
